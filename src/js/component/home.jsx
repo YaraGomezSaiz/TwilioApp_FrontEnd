@@ -127,7 +127,7 @@ const Home = () => {
 				</h1>
 				{showjacket ? (
 					<h1 className="far fa-laugh-beam red pt-2">
-						<span className="pl-3 pr-4">RED TWILIO JACKET</span>
+						<span className="pl-3 pr-4">RED JACKET</span>
 					</h1>
 				) : (
 					""
