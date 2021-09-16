@@ -13,14 +13,19 @@ const Home = () => {
 	const [message, setmessage] = useState("");
 	const [messagecolor, setmessagecolor] = useState("");
 	const [phone, setphone] = useState("");
+	const [showprize, setshowprize] = useState(false);
 
 	function play() {
+		event.preventDefault();
+		setshowprize(false);
 		setmessage("");
 		setmessagecolor("");
 		fetch(BASENAME + "/", {
-			method: "GET",
-			mode: "cors",
-			headers: { "Content-Type": "application/json" }
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(phone)
 		})
 			.then(response => response.json())
 			.then(data => {
@@ -31,11 +36,13 @@ const Home = () => {
 						"  Ohhh sorry bad luck. Press play to try it again"
 					);
 					setmessagecolor("red far fa-sad-cry");
+					setshowprize(false);
 				} else {
 					setmessage(
 						"  Yesss, well done. Check your prize in your mobile phone!!"
 					);
 					setmessagecolor("green far fa-smile");
+					setshowprize(true);
 				}
 			});
 	}
@@ -106,6 +113,16 @@ const Home = () => {
 				<h1 className={messagecolor}>
 					<span className="pl-3">{message}</span>
 				</h1>
+				{showprize ? (
+					<button type="button" className="btn btn-success">
+						Show{" "}
+					</button>
+				) : (
+					""
+				)}
+				<button type="button" className="btn btn-success">
+					Show{" "}
+				</button>
 			</div>
 		</div>
 	);
