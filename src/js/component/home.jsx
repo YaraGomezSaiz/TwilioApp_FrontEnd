@@ -10,8 +10,12 @@ const Home = () => {
 	let BASENAME = "https://8d2e-77-230-204-78.ngrok.io";
 	const [responsenumber, setResponsenumber] = useState(null);
 	const [responsetext, setResponsetext] = useState(null);
+	const [message, setmessage] = useState("");
+	const [messagecolor, setmessagecolor] = useState("");
 
 	function play() {
+		setmessage("");
+		setmessagecolor("");
 		fetch(BASENAME + "/", {
 			method: "GET",
 			mode: "cors",
@@ -21,8 +25,18 @@ const Home = () => {
 			.then(data => {
 				setResponsenumber(data.number);
 				setResponsetext(data.text);
-			})
-			.catch(error => console.log("error is", error));
+				if (data.number <= 2) {
+					setmessage(
+						"Ohhhh sorry bad luck. Press 'Play' to try it again :("
+					);
+					setmessagecolor("red");
+				} else {
+					setmessage(
+						"Yesss, well done. Check your prize in your mobile phone. :) !!"
+					);
+					setmessagecolor("green");
+				}
+			});
 	}
 
 	return (
@@ -128,7 +142,7 @@ const Home = () => {
 				<h1 className="display-4">Do you want to play?</h1>
 				<p className="lead">I know that you are really excited :) </p>
 				<hr className="my-4" />
-				<p>Press button to get your price</p>
+				<p>Press button to get your prize</p>
 				<p className="lead">
 					<a
 						className="btn btn-primary btn-lg"
@@ -138,6 +152,7 @@ const Home = () => {
 						Play
 					</a>
 				</p>
+				<h1 className={messagecolor}>{message}</h1>
 			</div>
 		</div>
 	);
