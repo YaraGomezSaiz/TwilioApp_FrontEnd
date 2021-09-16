@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 //include bootstrap npm library into the bundle
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -7,16 +7,50 @@ import "../../styles/index.scss";
 
 //create your first component
 const Home = () => {
+	// let BASENAME = "https://0e60-77-230-204-78.ngrok.io";
+	const [responsenumber, setResponsenumber] = useState(null);
+	const [error, setError] = useState("");
+
+	function play() {
+		let responseOk = false;
+		fetch("https://0691-77-230-204-78.ngrok.io/", {
+			method: "GET",
+			mode: "no-cors"
+		})
+			// .then(response => {
+			// 	response.json();
+			// 	console.log(response.json());
+			// })
+			// .then(response => console.log(response));
+			.then(response => {
+				responseOk = response.ok;
+				console.log("ok");
+				return response.json();
+			})
+			.then(responseJson => {
+				if (responseOk) {
+					console.log("todo OK");
+				} else {
+					setError(responseJson.message);
+					console.log("Error");
+				}
+			})
+			.catch(error => {
+				setError(error.message);
+			});
+		console.log(error);
+	}
+
 	return (
-		<div className="text-center mt-5">
+		<div className="text-center mt-1">
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
 				<div className="container-fluid">
 					<a className="navbar-brand" href="#">
 						<img
-							src="https://toppng.com/uploads/preview/twilio-logo-11609380242jwkoktksba.png"
+							src="https://www.chetu.com/img/twilio/partner/twilio-logo.png"
 							alt=""
 							width="200"
-							height="100"
+							height="80"
 						/>
 					</a>
 					<button
@@ -115,7 +149,8 @@ const Home = () => {
 					<a
 						className="btn btn-primary btn-lg"
 						href="#"
-						role="button">
+						role="button"
+						onClick={() => play()}>
 						Play
 					</a>
 				</p>
