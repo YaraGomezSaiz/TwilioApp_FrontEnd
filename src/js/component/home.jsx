@@ -7,7 +7,7 @@ import "../../styles/index.scss";
 
 //create your first component
 const Home = () => {
-	let BASENAME = "https://4496-77-230-204-78.ngrok.io";
+	let BASENAME = "https://208b-77-230-204-78.ngrok.io";
 	const [responsenumber, setResponsenumber] = useState(null);
 	const [responsetext, setResponsetext] = useState(null);
 	const [message, setmessage] = useState("");
@@ -33,7 +33,7 @@ const Home = () => {
 			.then(data => {
 				setResponsenumber(data.number);
 				setResponsetext(data.text);
-				if (data.number <= 2) {
+				if (data.number <= 3) {
 					setmessage(
 						"  Ohhh sorry bad luck. Press play to try it again"
 					);
