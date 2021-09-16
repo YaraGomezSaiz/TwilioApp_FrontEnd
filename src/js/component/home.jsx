@@ -13,11 +13,13 @@ const Home = () => {
 	const [message, setmessage] = useState("");
 	const [messagecolor, setmessagecolor] = useState("");
 	const [phone, setphone] = useState("");
-	const [showprize, setshowprize] = useState(false);
+	const [showprizebutton, setshowprizebutton] = useState(false);
+	const [showjacket, setshowjacket] = useState(false);
 
 	function play() {
 		event.preventDefault();
-		setshowprize(false);
+		setshowprizebutton(false);
+		setshowjacket(false);
 		setmessage("");
 		setmessagecolor("");
 		fetch(BASENAME + "/", {
@@ -36,26 +38,25 @@ const Home = () => {
 						"  Ohhh sorry bad luck. Press play to try it again"
 					);
 					setmessagecolor("red far fa-sad-cry");
-					setshowprize(false);
 				} else {
 					setmessage(
 						"  Yesss, well done. Check your prize in your mobile phone!!"
 					);
 					setmessagecolor("green far fa-smile");
-					setshowprize(true);
+					setshowprizebutton(true);
 				}
 			});
 	}
 
 	return (
-		<div className="text-center mt-1">
+		<div className="text-center ">
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
 				<div className="container-fluid">
 					<a className="navbar-brand" href="#">
 						<img
 							src="https://www.chetu.com/img/twilio/partner/twilio-logo.png"
 							alt=""
-							width="180"
+							width="190"
 							height="90"
 						/>
 					</a>
@@ -76,7 +77,10 @@ const Home = () => {
 			</nav>
 
 			<div className="jumbotron p-4 jumbotron-fluid">
-				<h1 className="display-4">Do you want to play?</h1>
+				<h1 className="display-4">Do you want to get a prize?</h1>
+				<p className="lead">
+					Introduce your phone number and press play{" "}
+				</p>
 				<p className="lead">I know that you are really excited :) </p>
 				<hr className="my-4" />
 
@@ -85,9 +89,7 @@ const Home = () => {
 						<div className="form-group mb-2">
 							<i className="fas fa-mobile-alt">
 								{" "}
-								<span className="pl-2">
-									Introduce your mobile phone
-								</span>
+								<span className="pl-2">Phone</span>
 							</i>
 						</div>
 						<div className="form-group mx-sm-3 mb-2 col-xs-3">
@@ -95,7 +97,7 @@ const Home = () => {
 								type="text"
 								className="form-control "
 								id="inputPassword2"
-								placeholder="Phone number"
+								placeholder="+34xxxxxxxxx"
 								onChange={() => setphone(event.target.value)}
 							/>
 						</div>
@@ -111,18 +113,34 @@ const Home = () => {
 				</p>
 
 				<h1 className={messagecolor}>
-					<span className="pl-3">{message}</span>
+					<span className="pl-3 pr-4">{message}</span>
+					{showprizebutton ? (
+						<button
+							type="button"
+							className="btn btn-outline-success btn-sm"
+							onClick={() => setshowjacket(true)}>
+							Show{" "}
+						</button>
+					) : (
+						""
+					)}
 				</h1>
-				{showprize ? (
-					<button type="button" className="btn btn-success">
-						Show{" "}
-					</button>
+				{showjacket ? (
+					<h1 className="far fa-laugh-beam red pt-2">
+						<span className="pl-3 pr-4">RED TWILIO JACKET</span>
+					</h1>
 				) : (
 					""
 				)}
-				<button type="button" className="btn btn-success">
-					Show{" "}
-				</button>
+				{showjacket ? (
+					<img
+						className="pt-2 mt-2"
+						src="https://i.ebayimg.com/images/g/Gy4AAOSw8A1eGk~-/s-l400.jpg"
+						alt=""
+					/>
+				) : (
+					""
+				)}
 			</div>
 		</div>
 	);
