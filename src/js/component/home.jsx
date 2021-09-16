@@ -7,38 +7,22 @@ import "../../styles/index.scss";
 
 //create your first component
 const Home = () => {
-	// let BASENAME = "https://0e60-77-230-204-78.ngrok.io";
+	let BASENAME = "https://8d2e-77-230-204-78.ngrok.io";
 	const [responsenumber, setResponsenumber] = useState(null);
-	const [error, setError] = useState("");
+	const [responsetext, setResponsetext] = useState(null);
 
 	function play() {
-		let responseOk = false;
-		fetch("https://0691-77-230-204-78.ngrok.io/", {
+		fetch(BASENAME + "/", {
 			method: "GET",
-			mode: "no-cors"
+			mode: "cors",
+			headers: { "Content-Type": "application/json" }
 		})
-			// .then(response => {
-			// 	response.json();
-			// 	console.log(response.json());
-			// })
-			// .then(response => console.log(response));
-			.then(response => {
-				responseOk = response.ok;
-				console.log("ok");
-				return response.json();
+			.then(response => response.json())
+			.then(data => {
+				setResponsenumber(data.number);
+				setResponsetext(data.text);
 			})
-			.then(responseJson => {
-				if (responseOk) {
-					console.log("todo OK");
-				} else {
-					setError(responseJson.message);
-					console.log("Error");
-				}
-			})
-			.catch(error => {
-				setError(error.message);
-			});
-		console.log(error);
+			.catch(error => console.log("error is", error));
 	}
 
 	return (
