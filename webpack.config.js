@@ -5,7 +5,7 @@ var PrettierPlugin = require("prettier-webpack-plugin");
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 
 const port = 3000;
-const schema = 'http'
+const schema = 'https'
 const host = 'localhost'
 
 let publicUrl = `${schema}://${host}:${port}`;
