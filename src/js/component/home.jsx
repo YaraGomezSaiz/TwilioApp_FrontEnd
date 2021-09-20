@@ -7,7 +7,7 @@ import "../../styles/index.scss";
 
 //create your first component
 const Home = () => {
-	let BASENAME = "https://208b-77-230-204-78.ngrok.io";
+	let BASENAME = "https://8400-77-230-204-78.ngrok.io";
 	const [responsenumber, setResponsenumber] = useState(null);
 	const [responsetext, setResponsetext] = useState(null);
 	const [message, setmessage] = useState("");
@@ -15,6 +15,7 @@ const Home = () => {
 	const [phone, setphone] = useState("");
 	const [showprizebutton, setshowprizebutton] = useState(false);
 	const [showjacket, setshowjacket] = useState(false);
+	const[test,setTest]=useState(null)
 
 	function play() {
 		event.preventDefault();
