@@ -5,7 +5,10 @@ var PrettierPlugin = require("prettier-webpack-plugin");
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 
 const port = 3000;
-let publicUrl = `http://localhost:${port}`;
+const schema = 'http'
+const host = 'localhost'
+
+let publicUrl = `${schema}://${host}:${port}`;
 if(process.env.GITPOD_WORKSPACE_URL){
   const [schema, host] = process.env.GITPOD_WORKSPACE_URL.split('://');
   publicUrl = `${port}-${host}`;
